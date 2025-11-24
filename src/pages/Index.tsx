@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Icon from "@/components/ui/icon";
 import { useState } from "react";
+import RussiaMap from "@/components/RussiaMap";
 
 const Index = () => {
   const [bookingOpen, setBookingOpen] = useState(false);
@@ -117,6 +118,15 @@ const Index = () => {
               </Card>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="py-20 px-4 bg-gradient-to-b from-background to-secondary/20">
+        <div className="container mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-primary">Наша сеть по всей России</h2>
+          <p className="text-center text-muted-foreground mb-12 text-lg">Выберите город на карте и узнайте о наших отелях</p>
+          
+          <RussiaMap />
         </div>
       </section>
 
