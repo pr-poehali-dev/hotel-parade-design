@@ -87,43 +87,29 @@ const RussiaMap = () => {
 
   return (
     <div className="w-full max-w-7xl mx-auto">
-      <div className="relative w-full" style={{ paddingBottom: "50%" }}>
+      <div className="relative w-full rounded-xl overflow-hidden shadow-2xl" style={{ paddingBottom: "50%" }}>
+        <img 
+          src="https://cdn.poehali.dev/projects/68ef16cf-8d97-4d5b-b7e3-74493903031d/files/a6d01d24-e750-46b6-b58d-cf55a07af7f0.jpg"
+          alt="Карта России"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        
         <svg
           viewBox="0 0 100 60"
           className="absolute inset-0 w-full h-full"
-          style={{ filter: "drop-shadow(0 4px 6px rgba(0,0,0,0.1))" }}
         >
-          <path
-            d="M5,25 L15,20 L25,18 L35,20 L42,22 L45,25 L48,23 L55,22 L65,25 L72,28 L78,30 L85,32 L90,35 L93,40 L95,45 L93,50 L88,52 L82,50 L75,48 L68,50 L60,52 L52,55 L45,56 L38,55 L30,52 L22,50 L15,48 L10,45 L7,40 L5,35 L5,30 Z"
-            fill="hsl(var(--primary))"
-            fillOpacity="0.1"
-            stroke="hsl(var(--primary))"
-            strokeWidth="0.3"
-            className="transition-all duration-300"
-          />
-          
-          {cities.map((city, idx) => (
+          {cities.map((city) => (
             <g key={city.name}>
               <circle
                 cx={city.x}
                 cy={city.y}
-                r="1.2"
+                r={hoveredCity === city.name ? "1.2" : "0.8"}
                 fill="hsl(var(--accent))"
-                opacity="0.3"
-                className="animate-ripple"
-                style={{ animationDelay: `${idx * 0.3}s` }}
-              />
-              <circle
-                cx={city.x}
-                cy={city.y}
-                r={hoveredCity === city.name ? "1.5" : "1"}
-                fill="hsl(var(--accent))"
-                className="cursor-pointer transition-all duration-200 hover:opacity-100 animate-pulse-slow"
-                opacity={hoveredCity === city.name ? "1" : "0.9"}
+                className="cursor-pointer transition-all duration-300"
+                opacity={hoveredCity === city.name ? "1" : "0.85"}
                 onClick={() => setSelectedCity(city)}
                 onMouseEnter={() => setHoveredCity(city.name)}
                 onMouseLeave={() => setHoveredCity(null)}
-                style={{ animationDelay: `${idx * 0.2}s` }}
               />
               <circle
                 cx={city.x}
@@ -136,15 +122,26 @@ const RussiaMap = () => {
                 onMouseLeave={() => setHoveredCity(null)}
               />
               {hoveredCity === city.name && (
-                <text
-                  x={city.x}
-                  y={city.y - 2.5}
-                  textAnchor="middle"
-                  className="text-[2px] font-semibold fill-primary pointer-events-none"
-                  style={{ fontSize: "2.5px" }}
-                >
-                  {city.name}
-                </text>
+                <>
+                  <rect
+                    x={city.x - 3}
+                    y={city.y - 4.5}
+                    width="6"
+                    height="2"
+                    rx="0.3"
+                    fill="white"
+                    opacity="0.95"
+                  />
+                  <text
+                    x={city.x}
+                    y={city.y - 3.2}
+                    textAnchor="middle"
+                    className="font-semibold fill-primary pointer-events-none"
+                    style={{ fontSize: "1.2px" }}
+                  >
+                    {city.name}
+                  </text>
+                </>
               )}
             </g>
           ))}
