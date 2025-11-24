@@ -102,18 +102,28 @@ const RussiaMap = () => {
             className="transition-all duration-300"
           />
           
-          {cities.map((city) => (
+          {cities.map((city, idx) => (
             <g key={city.name}>
+              <circle
+                cx={city.x}
+                cy={city.y}
+                r="1.2"
+                fill="hsl(var(--accent))"
+                opacity="0.3"
+                className="animate-ripple"
+                style={{ animationDelay: `${idx * 0.3}s` }}
+              />
               <circle
                 cx={city.x}
                 cy={city.y}
                 r={hoveredCity === city.name ? "1.5" : "1"}
                 fill="hsl(var(--accent))"
-                className="cursor-pointer transition-all duration-200 hover:opacity-100"
-                opacity={hoveredCity === city.name ? "1" : "0.8"}
+                className="cursor-pointer transition-all duration-200 hover:opacity-100 animate-pulse-slow"
+                opacity={hoveredCity === city.name ? "1" : "0.9"}
                 onClick={() => setSelectedCity(city)}
                 onMouseEnter={() => setHoveredCity(city.name)}
                 onMouseLeave={() => setHoveredCity(null)}
+                style={{ animationDelay: `${idx * 0.2}s` }}
               />
               <circle
                 cx={city.x}
